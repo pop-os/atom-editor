@@ -1,3 +1,9 @@
+atom (1.58.0~pop1) focal; urgency=medium
+
+  * Update to 1.58.0 
+
+ -- Michael Aaron Murphy <mmstick@pm.me>  Wed, 22 Sep 2021 11:02:32 -0600
+
 atom (1.54.0~pop1) bionic; urgency=medium
 
   * Repackaging for Pop
