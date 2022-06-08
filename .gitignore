@@ -1,3 +1,4 @@
+cache/
 debian/*
 !debian/source
 !debian/changelog
