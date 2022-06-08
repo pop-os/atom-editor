@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-DESTDIR=debian/tmp
+DESTDIR=debian/atom
 PACKAGE=atom-amd64
 TARGET=cache/$(PACKAGE).deb
 
