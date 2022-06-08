@@ -2,12 +2,28 @@
 
 DESTDIR=debian/atom
 PACKAGE=atom-amd64
+TARGET=cache/$(PACKAGE).deb
+
+URL=https://atom-installer.github.com/v1.60.0/$(PACKAGE).deb
+SHA=5c7c0259062b9d4911d2537bfceaff5316f9de111698840a90d7cd497df891a6
 
 %:
 	dh $@
 
+override_dh_clean:
+	if ischroot; then \
+		test "$(SHA)" = "$(shell sha256sum ${TARGET} | cut -d' ' -f1)"; \
+	else \
+		if ! test "$(SHA)" = "$(shell sha256sum ${TARGET} | cut -d' ' -f1)"; then \
+			rm -rf cache; \
+			curl --create-dirs -o "${TARGET}" "$(URL)" ; \
+			test "$(SHA)" = "$(shell sha256sum ${TARGET} | cut -d' ' -f1)"; \
+		fi; \
+	fi
+
+
 override_dh_auto_install:
-	dpkg-deb -xv "amd64/$(PACKAGE).deb" "$(DESTDIR)"
+	dpkg-deb -xv "$(TARGET)" "$(DESTDIR)"
 
 override_dh_strip:
 override_dh_shlibdeps:
